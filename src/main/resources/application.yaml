@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: demo-springboot-ratelimiter-with-resilience4j
+
+resilience4j:
+  ratelimiter:
+    configs:
+      default:
+        limitForPeriod: 15
+        limitRefreshPeriod: 1s
+        timeoutDuration: 100ms
+      backendAConfig:
+        limitForPeriod: 5
+        limitRefreshPeriod: 1s
+        timeoutDuration: 100ms
+    instances:
+      backendA:
+        baseConfig: backendAConfig
+      backendB:
+        limitForPeriod: 10
+        limitRefreshPeriod: 1s
+        timeoutDuration: 100ms
